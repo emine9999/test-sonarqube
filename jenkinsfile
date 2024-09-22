@@ -15,9 +15,10 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 script {
-                    // Run SonarQube analysis
+                    // Reference the SonarScanner installed automatically
+                    def sonarScanner = tool 'sonarqube-scanner' // Use the exact name from Global Tool Configuration
                     sh """
-                        sonar-scanner \
+                        ${sonarScanner}/bin/sonar-scanner \
                             -Dsonar.projectKey=my-js-sample-project \
                             -Dsonar.sources=. \
                             -Dsonar.host.url=http://128.110.217.203:9000 \
