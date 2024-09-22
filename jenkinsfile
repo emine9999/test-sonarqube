@@ -2,18 +2,17 @@ pipeline {
     agent any
 
     stages {
-       
         stage('SonarQube Analysis') {
             steps {
                 script {
                     // Run SonarQube analysis
-                    sh '''
+                    sh """
                         sonar-scanner \
                             -Dsonar.projectKey=my-js-sample-project \
                             -Dsonar.sources=. \
-                            -Dsonar.host.url=${env.SONARQUBE_URL} \
-                            -Dsonar.login=${env.SONARQUBE_TOKEN}
-                    '''
+                            -Dsonar.host.url=${SONARQUBE_URL} \
+                            -Dsonar.login=${SONARQUBE_TOKEN}
+                    """
                 }
             }
         }
