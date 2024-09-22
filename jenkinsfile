@@ -2,37 +2,17 @@ pipeline {
     agent any
 
     stages {
-
-        stage('Install Node.js') {
+        stage('Checkout') {
             steps {
-                script {
-                    // Install Node.js and npm if not installed
-                    sh '''
-                        if ! command -v node &> /dev/null; then
-                            echo "Node.js not found. Installing..."
-                            sudo apt update
-                            sudo apt install -y nodejs npm
-                        else
-                            echo "Node.js is already installed."
-                        fi
-                    '''
-                }
-            }
-        }
-
-        stage('Install Dependencies') {
-            steps {
-                script {
-                    // For JavaScript
-                    sh 'npm install'
-                }
+                // Checkout the code from your repository
+                git 'https://github.com/emine9999/test-sonarqube.git'
             }
         }
 
         stage('SonarQube Analysis') {
             steps {
                 script {
-                    // For JavaScript
+                    // Run SonarQube analysis
                     sh '''
                         sonar-scanner \
                             -Dsonar.projectKey=my-js-sample-project \
