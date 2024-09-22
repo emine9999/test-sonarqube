@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        SONARQUBE_URL = 'http://128.110.217.203:9000'
+        SONARQUBE_TOKEN = 'b93391a0b487e82c143aa36c3955f16a6aa655ad'
+    }
+
     stages {
         stage('SonarQube Analysis') {
             steps {
