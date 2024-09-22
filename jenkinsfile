@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    // For JavaScript
+                    sh 'npm install'
+                }
+            }
+        }
+
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    // For JavaScript
+                    sh '''
+                        sonar-scanner \
+                            -Dsonar.projectKey=my-js-sample-project \
+                            -Dsonar.sources=. \
+                            -Dsonar.host.url=${env.SONARQUBE_URL} \
+                            -Dsonar.login=${env.SONARQUBE_TOKEN}
+                    '''
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'Building the project...'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Cleaning up...'
+        }
+    }
+}
