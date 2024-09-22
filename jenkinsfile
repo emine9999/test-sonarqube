@@ -1,12 +1,17 @@
 pipeline {
     agent any
 
-    environment {
-        SONARQUBE_URL = 'http://128.110.217.203:9000'
-        SONARQUBE_TOKEN = 'b93391a0b487e82c143aa36c3955f16a6aa655ad'
-    }
-
     stages {
+        stage('Debug') {
+            steps {
+                script {
+                    echo "SONARQUBE_URL: http://128.110.217.203:9000"
+                    echo "SONARQUBE_TOKEN: b93391a0b487e82c143aa36c3955f16a6aa655ad"
+                    sh 'curl -X GET http://128.110.217.203:9000/api/system/status'
+                }
+            }
+        }
+
         stage('SonarQube Analysis') {
             steps {
                 script {
@@ -15,8 +20,8 @@ pipeline {
                         sonar-scanner \
                             -Dsonar.projectKey=my-js-sample-project \
                             -Dsonar.sources=. \
-                            -Dsonar.host.url=${SONARQUBE_URL} \
-                            -Dsonar.login=${SONARQUBE_TOKEN}
+                            -Dsonar.host.url=http://128.110.217.203:9000 \
+                            -Dsonar.login=b93391a0b487e82c143aa36c3955f16a6aa655ad
                     """
                 }
             }
