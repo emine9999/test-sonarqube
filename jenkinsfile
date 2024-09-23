@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         SONARQUBE_URL = "http://128.110.217.203:9000"
-        SONARQUBE_TOKEN = credentials('sonarqube-token') // Use a credentials ID instead of hardcoding the token
+        SONARQUBE_TOKEN = credentials('sonar-token') // Use a credentials ID instead of hardcoding the token
     }
     
     tools {
