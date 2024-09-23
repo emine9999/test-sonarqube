@@ -29,7 +29,7 @@ pipeline {
                     withSonarQubeEnv('sonarqube-server') { // Make sure this matches your SonarQube server name in Jenkins configuration
                         sh """
                             ${scannerHome}/bin/sonar-scanner \
-                                -Dsonar.projectKey=my-js-sample-project \
+                                -Dsonar.projectKey=my-py-sample-project \
                                 -Dsonar.sources=. \
                                 -Dsonar.host.url=${SONARQUBE_URL} \
                                 -Dsonar.token=${SONARQUBE_TOKEN}
