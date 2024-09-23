@@ -26,7 +26,7 @@ pipeline {
             steps {
                 script {
                     def scannerHome = tool 'sonarqube-scanner'
-                    withSonarQubeEnv('SonarQube') { // Make sure this matches your SonarQube server name in Jenkins configuration
+                    withSonarQubeEnv('sonarqube-server') { // Make sure this matches your SonarQube server name in Jenkins configuration
                         sh """
                             ${scannerHome}/bin/sonar-scanner \
                                 -Dsonar.projectKey=my-js-sample-project \
