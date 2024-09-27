@@ -3,11 +3,11 @@ pipeline {
     
     environment {
         SONARQUBE_URL = "http://128.110.217.203:9000"
-        SONARQUBE_TOKEN = credentials('sonar-token') // Use a credentials ID instead of hardcoding the token
+        SONARQUBE_TOKEN = credentials('sonar_token') // Use a credentials ID instead of hardcoding the token
     }
     
     tools {
-        jdk 'java17' // Specify the JDK to use, make sure this matches a JDK installation name in Jenkins
+        jdk 'jdk11' // Specify the JDK to use, make sure this matches a JDK installation name in Jenkins
     }
     
     stages {
@@ -25,8 +25,8 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 script {
-                    def scannerHome = tool 'sonarqube-scanner'
-                    withSonarQubeEnv('sonarqube-server') { // Make sure this matches your SonarQube server name in Jenkins configuration
+                    def scannerHome = tool 'sonar-scanner'
+                    withSonarQubeEnv('sonar-server') { // Make sure this matches your SonarQube server name in Jenkins configuration
                         sh """
                             ${scannerHome}/bin/sonar-scanner \
                                 -Dsonar.projectKey=my-py-sample-project \
